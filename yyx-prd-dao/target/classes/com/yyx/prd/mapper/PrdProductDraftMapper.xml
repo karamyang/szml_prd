@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyx.prd.mapper.PrdProductDraftMapper">
+  <resultMap id="BaseResultMap" type="com.yyx.prd.model.product.PrdProductDraft">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_pictrue" jdbcType="VARCHAR" property="productPictrue" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="privider_name" jdbcType="VARCHAR" property="prividerName" />
+    <result column="privider_phone" jdbcType="VARCHAR" property="prividerPhone" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="price_type" jdbcType="VARCHAR" property="priceType" />
+    <result column="price_point" jdbcType="VARCHAR" property="pricePoint" />
+    <result column="price_cash" jdbcType="VARCHAR" property="priceCash" />
+    <result column="exchange_limit" jdbcType="VARCHAR" property="exchangeLimit" />
+    <result column="product_stock" jdbcType="BIGINT" property="productStock" />
+    <result column="product_draft_state" jdbcType="VARCHAR" property="productDraftState" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="admin_id" jdbcType="BIGINT" property="adminId" />
+    <result column="proxy_admin_id" jdbcType="BIGINT" property="proxyAdminId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_name, product_pictrue, type_id, privider_name, privider_phone, area_id, 
+    price_type, price_point, price_cash, exchange_limit, product_stock, product_draft_state, 
+    create_time, update_time, admin_id, proxy_admin_id
+  </sql>
+  <select id="selectByExample" parameterType="com.yyx.prd.model.product.PrdProductDraftExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prd_product_draft
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prd_product_draft
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from prd_product_draft
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yyx.prd.model.product.PrdProductDraftExample">
+    delete from prd_product_draft
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yyx.prd.model.product.PrdProductDraft">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into prd_product_draft (product_name, product_pictrue, type_id, 
+      privider_name, privider_phone, area_id, 
+      price_type, price_point, price_cash, 
+      exchange_limit, product_stock, product_draft_state, 
+      create_time, update_time, admin_id, 
+      proxy_admin_id)
+    values (#{productName,jdbcType=VARCHAR}, #{productPictrue,jdbcType=VARCHAR}, #{typeId,jdbcType=BIGINT}, 
+      #{prividerName,jdbcType=VARCHAR}, #{prividerPhone,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, 
+      #{priceType,jdbcType=VARCHAR}, #{pricePoint,jdbcType=VARCHAR}, #{priceCash,jdbcType=VARCHAR}, 
+      #{exchangeLimit,jdbcType=VARCHAR}, #{productStock,jdbcType=BIGINT}, #{productDraftState,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{adminId,jdbcType=BIGINT}, 
+      #{proxyAdminId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyx.prd.model.product.PrdProductDraft">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into prd_product_draft
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productPictrue != null">
+        product_pictrue,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="prividerName != null">
+        privider_name,
+      </if>
+      <if test="prividerPhone != null">
+        privider_phone,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="priceType != null">
+        price_type,
+      </if>
+      <if test="pricePoint != null">
+        price_point,
+      </if>
+      <if test="priceCash != null">
+        price_cash,
+      </if>
+      <if test="exchangeLimit != null">
+        exchange_limit,
+      </if>
+      <if test="productStock != null">
+        product_stock,
+      </if>
+      <if test="productDraftState != null">
+        product_draft_state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="proxyAdminId != null">
+        proxy_admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPictrue != null">
+        #{productPictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="prividerName != null">
+        #{prividerName,jdbcType=VARCHAR},
+      </if>
+      <if test="prividerPhone != null">
+        #{prividerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="priceType != null">
+        #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePoint != null">
+        #{pricePoint,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCash != null">
+        #{priceCash,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeLimit != null">
+        #{exchangeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="productStock != null">
+        #{productStock,jdbcType=BIGINT},
+      </if>
+      <if test="productDraftState != null">
+        #{productDraftState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="proxyAdminId != null">
+        #{proxyAdminId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yyx.prd.model.product.PrdProductDraftExample" resultType="java.lang.Integer">
+    select count(*) from prd_product_draft
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update prd_product_draft
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPictrue != null">
+        product_pictrue = #{record.productPictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.prividerName != null">
+        privider_name = #{record.prividerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prividerPhone != null">
+        privider_phone = #{record.prividerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.priceType != null">
+        price_type = #{record.priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pricePoint != null">
+        price_point = #{record.pricePoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceCash != null">
+        price_cash = #{record.priceCash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangeLimit != null">
+        exchange_limit = #{record.exchangeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productStock != null">
+        product_stock = #{record.productStock,jdbcType=BIGINT},
+      </if>
+      <if test="record.productDraftState != null">
+        product_draft_state = #{record.productDraftState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=BIGINT},
+      </if>
+      <if test="record.proxyAdminId != null">
+        proxy_admin_id = #{record.proxyAdminId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update prd_product_draft
+    set id = #{record.id,jdbcType=BIGINT},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_pictrue = #{record.productPictrue,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=BIGINT},
+      privider_name = #{record.prividerName,jdbcType=VARCHAR},
+      privider_phone = #{record.prividerPhone,jdbcType=VARCHAR},
+      area_id = #{record.areaId,jdbcType=BIGINT},
+      price_type = #{record.priceType,jdbcType=VARCHAR},
+      price_point = #{record.pricePoint,jdbcType=VARCHAR},
+      price_cash = #{record.priceCash,jdbcType=VARCHAR},
+      exchange_limit = #{record.exchangeLimit,jdbcType=VARCHAR},
+      product_stock = #{record.productStock,jdbcType=BIGINT},
+      product_draft_state = #{record.productDraftState,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      admin_id = #{record.adminId,jdbcType=BIGINT},
+      proxy_admin_id = #{record.proxyAdminId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyx.prd.model.product.PrdProductDraft">
+    update prd_product_draft
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPictrue != null">
+        product_pictrue = #{productPictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="prividerName != null">
+        privider_name = #{prividerName,jdbcType=VARCHAR},
+      </if>
+      <if test="prividerPhone != null">
+        privider_phone = #{prividerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="priceType != null">
+        price_type = #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePoint != null">
+        price_point = #{pricePoint,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCash != null">
+        price_cash = #{priceCash,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeLimit != null">
+        exchange_limit = #{exchangeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="productStock != null">
+        product_stock = #{productStock,jdbcType=BIGINT},
+      </if>
+      <if test="productDraftState != null">
+        product_draft_state = #{productDraftState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="proxyAdminId != null">
+        proxy_admin_id = #{proxyAdminId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyx.prd.model.product.PrdProductDraft">
+    update prd_product_draft
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_pictrue = #{productPictrue,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      privider_name = #{prividerName,jdbcType=VARCHAR},
+      privider_phone = #{prividerPhone,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      price_type = #{priceType,jdbcType=VARCHAR},
+      price_point = #{pricePoint,jdbcType=VARCHAR},
+      price_cash = #{priceCash,jdbcType=VARCHAR},
+      exchange_limit = #{exchangeLimit,jdbcType=VARCHAR},
+      product_stock = #{productStock,jdbcType=BIGINT},
+      product_draft_state = #{productDraftState,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=BIGINT},
+      proxy_admin_id = #{proxyAdminId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectAdminProduct" parameterType="java.lang.String" resultMap="BaseResultMap">
+      SELECT
+        p.*
+      FROM
+        prd_product_draft p
+      WHERE
+        p.admin_id=#{username}
+    </select>
+</mapper>

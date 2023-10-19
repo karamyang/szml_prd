@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="yyx-prd-service" />
+        <module name="yyx-prd-dao" />
+        <module name="yyx-prd-common" />
+        <module name="yyx-prd-bootstrap" />
+        <module name="yyx-prd-model" />
+        <module name="yyx-prd-interface" />
+        <module name="yyx-prd-security" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="yyx-prd-controller" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="yyx-prd-bootstrap" options="-parameters" />
+      <module name="yyx-prd-common" options="-parameters" />
+      <module name="yyx-prd-controller" options="-parameters" />
+      <module name="yyx-prd-dao" options="-parameters" />
+      <module name="yyx-prd-interface" options="-parameters" />
+      <module name="yyx-prd-model" options="-parameters" />
+      <module name="yyx-prd-security" options="-parameters" />
+      <module name="yyx-prd-service" options="-parameters" />
+    </option>
+  </component>
+</project>
